@@ -1,5 +1,7 @@
 # Design Document
 
+Diagrams were designed in Figma. The PNG files are in [diagrams/](diagrams/).
+
 ## Objectives
 - Replace manual record keeping with a validated database.
 - Calculate trip fares automatically and consistently.
@@ -26,41 +28,10 @@
 | Testability | Services take a `Database` object, so tests use an in-memory database. |
 
 ## System architecture
-```mermaid
-flowchart TB
-    UI["ui: main_menu, fleet_menu, trip_menu, report_menu"] --> S
-    subgraph S["services"]
-        F[FleetService]
-        T[TripService]
-        R[ReportService]
-        V[validators]
-        B[billing]
-    end
-    F --> V
-    T --> V
-    T --> B
-    T --> F
-    R --> V
-    S --> M[models]
-    S --> D["database: Database, schema"]
-    D --> DB[(SQLite file)]
-    S --> L[logger]
-```
+![System architecture](diagrams/01_system_architecture.png)
 
 ## Workflow
-```mermaid
-flowchart TD
-    A[Start] --> B[Open database and create tables]
-    B --> C{Main menu}
-    C -->|1| D[Fleet management]
-    C -->|2| E[Trips and billing]
-    C -->|3| F[Reports]
-    C -->|4| G[Close database and exit]
-    D --> C
-    E --> C
-    F --> C
-    C -->|error| H[Show message] --> C
-```
+![Workflow](diagrams/02_workflow.png)
 
 ## Use case diagram
 ```mermaid
@@ -76,48 +47,7 @@ flowchart LR
 ```
 
 ## Class diagram
-```mermaid
-classDiagram
-    class Database {
-        +run(query, params)
-        +fetchAll(query, params)
-        +fetchOne(query, params)
-        +close()
-    }
-    class FleetService {
-        +addVehicle()
-        +addDriver()
-        +getVehicles()
-        +getDrivers()
-        +updateVehicleCapacity()
-        +updateDriverPhone()
-        +deleteVehicle()
-        +deleteDriver()
-    }
-    class TripService {
-        +addTrip()
-        +getTrips()
-        +getTripsBetween()
-        +deleteTrip()
-    }
-    class ReportService {
-        +revenueSummary()
-        +earningsByDriver()
-        +earningsByVehicle()
-        +topRoutes()
-        +exportTripsToCsv()
-    }
-    class Vehicle
-    class Driver
-    class Trip
-    FleetService --> Database
-    TripService --> Database
-    TripService --> FleetService
-    ReportService --> Database
-    FleetService ..> Vehicle
-    FleetService ..> Driver
-    TripService ..> Trip
-```
+![Class diagram](diagrams/04_class_diagram.png)
 
 ## Sequence diagram: adding a trip
 ```mermaid
@@ -140,34 +70,7 @@ sequenceDiagram
 ```
 
 ## ER diagram
-```mermaid
-erDiagram
-    VEHICLES ||--o{ TRIPS : "used in"
-    DRIVERS ||--o{ TRIPS : "drives"
-    VEHICLES {
-        int vehicle_id PK
-        text vehicle_type
-        text vehicle_number UK
-        int capacity
-    }
-    DRIVERS {
-        int driver_id PK
-        text driver_name
-        text driver_phone
-        text license_number UK
-    }
-    TRIPS {
-        int trip_id PK
-        int vehicle_id FK
-        int driver_id FK
-        text trip_date
-        text duration
-        int duration_seconds
-        text pickup_location
-        text drop_location
-        real total_sum
-    }
-```
+![ER diagram](diagrams/06_er_diagram.png)
 
 ## Design decisions
 - **SQLite instead of MySQL**: the original idea was to use a MySQL server and a root password. SQLite ships with Python, so the project runs anywhere, and tests can use an in-memory database.

@@ -30,6 +30,7 @@ Transport_Business_Management_Framework/
 │   └── ui/                    menus and input helpers
 ├── tests/                     unit tests
 ├── docs/design.md             architecture, UML, workflow and ER diagrams
+├── docs/diagrams/             diagram images (PNG)
 ├── statement.md               problem statement and scope
 └── requirements.txt
 ```
