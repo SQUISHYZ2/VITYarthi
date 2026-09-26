@@ -170,7 +170,7 @@ erDiagram
 ```
 
 ## Design decisions
-- **SQLite instead of MySQL**: the original code needed a MySQL server and a root password. SQLite ships with Python, so the project runs anywhere, and tests can use an in-memory database.
+- **SQLite instead of MySQL**: the original idea was to use a MySQL server and a root password. SQLite ships with Python, so the project runs anywhere, and tests can use an in-memory database.
 - **Service layer**: all rules live in services, so the menus only read input and print output.
 - **`duration_seconds` column**: durations are stored as text for display and as seconds for fast, exact aggregation in reports.
 - **Deletion guard**: vehicles and drivers with recorded trips cannot be deleted, so earnings history is never lost.
