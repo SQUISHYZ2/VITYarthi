@@ -34,40 +34,13 @@ Diagrams were designed in Figma. The PNG files are in [diagrams/](diagrams/).
 ![Workflow](diagrams/02_workflow.png)
 
 ## Use case diagram
-```mermaid
-flowchart LR
-    Admin((Admin))
-    Admin --> U1[Manage vehicles]
-    Admin --> U2[Manage drivers]
-    Admin --> U3[Record trip]
-    Admin --> U4[View trips by date]
-    Admin --> U5[View revenue reports]
-    Admin --> U6[Export trips to CSV]
-    U3 -.includes.-> U7[Calculate total sum]
-```
+![Use case diagram](diagrams/03_use_cases.png)
 
 ## Class diagram
 ![Class diagram](diagrams/04_class_diagram.png)
 
 ## Sequence diagram: adding a trip
-```mermaid
-sequenceDiagram
-    actor Admin
-    participant Menu as trip_menu
-    participant TS as TripService
-    participant FS as FleetService
-    participant Bill as billing
-    participant DB as Database
-    Admin->>Menu: vehicle ID, driver ID, date, time, locations
-    Menu->>TS: addTrip(...)
-    TS->>FS: getVehicle(), getDriver()
-    FS->>DB: SELECT
-    TS->>Bill: calculateTotalSum(time)
-    Bill-->>TS: total sum
-    TS->>DB: INSERT trip
-    TS-->>Menu: Trip
-    Menu-->>Admin: Trip added, total sum earned
-```
+![Sequence diagram: adding a trip](diagrams/05_sequence.png)
 
 ## ER diagram
 ![ER diagram](diagrams/06_er_diagram.png)
