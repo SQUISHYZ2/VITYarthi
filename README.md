@@ -44,10 +44,14 @@ Settings can be changed with environment variables: `TRANSPORT_DB` (database fil
 and `TRANSPORT_LOG` (log file, default `logs/transport.log`). The hourly rate is `ratePerHour` in `transport/config.py`.
 
 ## Testing
-Run from the project folder:
+Run from inside `Transport_Business_Management_Framework` (the folder this README is in, not its parent):
 ```
+cd Transport_Business_Management_Framework   # skip if you are already inside it
 python -m unittest discover -v
 ```
+Running `discover` from the parent folder reports "Ran 0 tests" — that folder has no `__init__.py`, so
+`unittest` never descends into it. `cd` into the project folder first.
+
 The tests use an in-memory database, so nothing on disk is touched (apart from the log file).
 
 ## Screenshots
