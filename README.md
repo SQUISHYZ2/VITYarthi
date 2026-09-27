@@ -50,7 +50,15 @@ python -m unittest discover -v
 ```
 The tests use an in-memory database, so nothing on disk is touched (apart from the log file).
 
+## Screenshots
+Design diagrams (see [docs/design.md](docs/design.md) for the full write-up):
+
+| | |
+|---|---|
+| ![System architecture](docs/diagrams/01_system_architecture.png) | ![Workflow](docs/diagrams/02_workflow.png) |
+| ![Use case diagram](docs/diagrams/03_use_cases.png) | ![Class diagram](docs/diagrams/04_class_diagram.png) |
+| ![Sequence diagram: adding a trip](docs/diagrams/05_sequence.png) | ![ER diagram](docs/diagrams/06_er_diagram.png) |
+
 ## Documentation
 See [statement.md](statement.md) for the problem statement and [docs/design.md](docs/design.md) for the design
 diagrams and non-functional requirements.
- 
